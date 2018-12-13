@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанных с этой сборкой.
-[assembly: AssemblyTitle("TourAgency")]
+[assembly: AssemblyTitle("TourAgencyServer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TourAgency")]
+[assembly: AssemblyProduct("TourAgencyServer")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов typelib, если этот проект видим для COM
-[assembly: Guid("7edb9dce-791c-421a-9329-08a36ee350b9")]
+[assembly: Guid("09e3d268-9ab0-4880-88b9-61213d836532")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //
