@@ -5,6 +5,7 @@ namespace TourAgencyServer.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using Newtonsoft.Json;
 
     [Table("travelagency.tourcategory")]
     public partial class tourcategory
@@ -23,9 +24,11 @@ namespace TourAgencyServer.Models
         [StringLength(100)]
         public string Name { get; set; }
 
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<image> images { get; set; }
 
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tour> tours { get; set; }
     }

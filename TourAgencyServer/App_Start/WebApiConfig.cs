@@ -10,8 +10,7 @@ namespace TourAgencyServer
     {
         public static void Register(HttpConfiguration config)
         {
-            // Конфигурация и службы веб-API
-            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            
             // Маршруты веб-API
             config.MapHttpAttributeRoutes();
 

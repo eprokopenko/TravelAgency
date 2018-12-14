@@ -131,7 +131,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\TourCategoryController.cs" />
+    <Compile Include="Controllers\TourCategoriesController.cs" />
     <Compile Include="Models\city.cs" />
     <Compile Include="Models\country.cs" />
     <Compile Include="Global.asax.cs">
@@ -140,7 +140,6 @@
     <Compile Include="Models\hotel.cs" />
     <Compile Include="Models\hotelcategory.cs" />
     <Compile Include="Models\image.cs" />
-    <Compile Include="Models\Class1.cs" />
     <Compile Include="Models\nutrition.cs" />
     <Compile Include="Models\order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
