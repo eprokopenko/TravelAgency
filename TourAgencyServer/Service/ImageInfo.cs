@@ -38,6 +38,12 @@ namespace TourAgencyServer.Service
                         images = GetImagesForTour(t);
                         break;
                     }
+                case "city":
+                    {
+                        city c = db.cities.SingleOrDefault<city>(m => m.IdCity == idElem);
+                        images = GetImagesForCity(c);
+                        break;
+                    }
             }
             foreach (image im in images)
             {
@@ -57,6 +63,12 @@ namespace TourAgencyServer.Service
         {
             TourContext db = new TourContext();
             List<image> result = (from image in db.images where image.IdTour == t.IdTour select image).ToList<image>();
+            return result;
+        }
+        static List<image> GetImagesForCity(city c)
+        {
+            TourContext db = new TourContext();
+            List<image> result = (from image in db.images where image.IdCity == c.IdCity select image).ToList<image>();
             return result;
         }
 
