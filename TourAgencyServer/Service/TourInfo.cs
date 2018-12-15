@@ -6,17 +6,17 @@ using TourAgencyServer.Models;
 
 namespace TourAgencyServer.Service
 {
-    public class TourService
+    public class TourInfo
     {
         TourContext db = new TourContext();
-        public tour Tour { get; set;  }
+        public tour Tour { get; set; }
         public List<DateTime> StartDates { get; set; }
         public hotel Hotel { get; set; }
         public city City { get; set; }
         public country Country { get; set; }
         public List<ImageInfo> Images { get; set; }
 
-        public TourService(tour t)
+        public TourInfo(tour t)
         {
             Tour = t;
             StartDates = (from tourInstance in db.tourinstances where tourInstance.IdTour == t.IdTour select tourInstance.StartDate).ToList<DateTime>();
@@ -25,5 +25,19 @@ namespace TourAgencyServer.Service
             Country = db.countries.SingleOrDefault<country>(m => m.IdСountry == City.IdСountry);
             Images = ImageInfo.GetImagesForElem("tour", Tour.IdTourCategory);
         }
-    }
+
+        public static List<TourInfo> GetListTourByCategory(int idCategory)
+        {
+            TourContext db = new TourContext();
+            List<TourInfo> result = new List<TourInfo>();
+            tourcategory tourCategory = db.tourcategories.Find(idCategory);
+            List<tour> tours = tourCategory.tours.ToList<tour>();
+            foreach (tour t in tours)
+            {
+                TourInfo nTourInfo = new TourInfo(t);
+                result.Add(nTourInfo);
+            }
+            return result;
+        }
+}
 }

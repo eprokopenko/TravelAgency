@@ -11,9 +11,10 @@ namespace TourAgencyServer.Service
         public tourcategory TourCategory { get; set; }
         public List<ImageInfo> Images { get; set; }
 
-        public TourCategoryInfo(tourcategory cat)
+        TourContext db = new TourContext();
+        public TourCategoryInfo(int idCategory)
         {
-            TourCategory = cat;
+            TourCategory = db.tourcategories.Find(idCategory);
             Images = ImageInfo.GetImagesForElem("category", TourCategory.IdTourCategory);
         }
 
@@ -23,7 +24,7 @@ namespace TourAgencyServer.Service
             List<TourCategoryInfo> result = new List<TourCategoryInfo>();
             foreach (tourcategory cat in db.tourcategories)
             {
-                TourCategoryInfo nCat = new TourCategoryInfo(cat);
+                TourCategoryInfo nCat = new TourCategoryInfo(cat.IdTourCategory);
                 result.Add(nCat);
             } 
             return result;

@@ -49,17 +49,15 @@ namespace TourAgencyServer.Controllers
         }
 
         [Route("api/tourcategories/{id}")]
-        public List<TourService> GetListTourInfoByTourcategory(int id)
+        public TourCategoryInfo GetTourcategory(int id)
         {
-            List<TourService> result = new List<TourService>();
-            tourcategory tourCategory = db.tourcategories.Find(id);
-            List<tour> tours = tourCategory.tours.ToList<tour>();
-            foreach (tour t in tours)
-            {
-                TourService nTourInfo = new TourService(t);
-                result.Add(nTourInfo);
-            }
-            return result;
+            return new TourCategoryInfo(id);
+        }
+
+        [Route("api/tourcategories/{id}/tours")]
+        public List<TourInfo> GetListTourInfoByTourcategory(int id)
+        {
+            return TourInfo.GetListTourByCategory(id);
         }
     }
 }
