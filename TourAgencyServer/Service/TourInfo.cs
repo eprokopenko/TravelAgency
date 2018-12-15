@@ -16,8 +16,9 @@ namespace TourAgencyServer.Service
         public country Country { get; set; }
         public List<ImageInfo> Images { get; set; }
 
-        public TourInfo(tour t)
+        public TourInfo(int idTour)
         {
+            tour t = db.tours.SingleOrDefault<tour>(m => m.IdTour == idTour);
             Tour = t;
             StartDates = (from tourInstance in db.tourinstances where tourInstance.IdTour == t.IdTour select tourInstance.StartDate).ToList<DateTime>();
             Hotel = db.hotels.SingleOrDefault<hotel>(m => m.IdHotel == t.IdHotel);
@@ -34,7 +35,7 @@ namespace TourAgencyServer.Service
             List<tour> tours = tourCategory.tours.ToList<tour>();
             foreach (tour t in tours)
             {
-                TourInfo nTourInfo = new TourInfo(t);
+                TourInfo nTourInfo = new TourInfo(t.IdTour);
                 result.Add(nTourInfo);
             }
             return result;
