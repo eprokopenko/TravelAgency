@@ -5,24 +5,32 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TourAgencyServer.Models;
+using TourAgencyServer.Service;
 using System.Data.Entity;
 
 namespace TourAgencyServer.Controllers
 {
     public class TourCategoriesController : ApiController
     {
-        TourModel db = new TourModel();
+        TourContext db = new TourContext();
 
-        public IEnumerable<tourcategory> GetAllCategories()
+        public List<TourCategoryInfo> GetAllCategories()
         {
-            return db.tourcategories;
+            return TourCategoryInfo.GetCategories();
         }
 
-        public tourcategory GetTourCategory(int id)
-        {
-            tourcategory tourCategory = db.tourcategories.Find(id);
-            return tourCategory;
-        }
+        //public List<TourService> GetTourCategoryInfo(int id)
+        //{
+        //    List<TourService> result = new List<TourService>();
+        //    tourcategory tourCategory = db.tourcategories.Find(id);
+        //    List<tour> tours = tourCategory.tours.ToList<tour>();
+        //    foreach (tour t in tours)
+        //    {
+        //        TourService nTourInfo = new TourService(t);
+        //        result.Add(nTourInfo);
+        //    }
+        //        return result;
+        //}
 
         [HttpPost]
         public void CreateTourCategory([FromBody]tourcategory tourCategory)

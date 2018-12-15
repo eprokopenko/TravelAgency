@@ -5,9 +5,9 @@ namespace TourAgencyServer.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class TourModel : DbContext
+    public partial class TourContext : DbContext
     {
-        public TourModel()
+        public TourContext()
             : base("name=TourModel")
         {
         }
@@ -121,11 +121,6 @@ namespace TourAgencyServer.Models
             modelBuilder.Entity<tourcategory>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<tourcategory>()
-                .HasMany(e => e.images)
-                .WithRequired(e => e.tourcategory)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<tourcategory>()
                 .HasMany(e => e.tours)

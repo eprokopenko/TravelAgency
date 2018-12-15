@@ -10,7 +10,6 @@ namespace TourAgencyServer.Models
     public partial class image
     {
         [Key]
-        [Column(Order = 0)]
         public int IdImage { get; set; }
 
         [Required]
@@ -20,21 +19,10 @@ namespace TourAgencyServer.Models
         [StringLength(45)]
         public string Imagecol { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int IdCity { get; set; }
+        public int? IdCity { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int IdTourCategory { get; set; }
+        public int? IdTourCategory { get; set; }
 
-        [Key]
-        [Column(Order = 3)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int IdTour { get; set; }
-
-        public virtual tourcategory tourcategory { get; set; }
+        public int? IdTour { get; set; }
     }
 }
