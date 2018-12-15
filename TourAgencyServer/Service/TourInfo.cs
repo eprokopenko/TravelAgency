@@ -4,24 +4,26 @@ using System.Linq;
 using System.Web;
 using TourAgencyServer.Models;
 
-namespace TourAgencyServer
+namespace TourAgencyServer.Service
 {
     public class TourService
     {
         TourContext db = new TourContext();
-        public tour tour { get; set;  }
-        public List<DateTime> startDates { get; set; }
-        public hotel hotel { get; set; }
-        public city city { get; set; }
-        public country country { get; set; }
+        public tour Tour { get; set;  }
+        public List<DateTime> StartDates { get; set; }
+        public hotel Hotel { get; set; }
+        public city City { get; set; }
+        public country Country { get; set; }
+        public List<ImageInfo> Images { get; set; }
 
         public TourService(tour t)
         {
-            tour = t;
-            startDates = (from tourInstance in db.tourinstances where tourInstance.IdTour == t.IdTour select tourInstance.StartDate).ToList<DateTime>();
-            hotel = db.hotels.SingleOrDefault<hotel>(m => m.IdHotel == t.IdHotel);
-            city = db.cities.SingleOrDefault<city>(m => m.IdCity == hotel.IdCity);
-            country = db.countries.SingleOrDefault<country>(m => m.IdСountry == city.IdСountry);
+            Tour = t;
+            StartDates = (from tourInstance in db.tourinstances where tourInstance.IdTour == t.IdTour select tourInstance.StartDate).ToList<DateTime>();
+            Hotel = db.hotels.SingleOrDefault<hotel>(m => m.IdHotel == t.IdHotel);
+            City = db.cities.SingleOrDefault<city>(m => m.IdCity == Hotel.IdCity);
+            Country = db.countries.SingleOrDefault<country>(m => m.IdСountry == City.IdСountry);
+            Images = ImageInfo.GetImagesForElem("tour", Tour.IdTourCategory);
         }
     }
 }

@@ -19,18 +19,6 @@ namespace TourAgencyServer.Controllers
             return TourCategoryInfo.GetCategories();
         }
 
-        //public List<TourService> GetTourCategoryInfo(int id)
-        //{
-        //    List<TourService> result = new List<TourService>();
-        //    tourcategory tourCategory = db.tourcategories.Find(id);
-        //    List<tour> tours = tourCategory.tours.ToList<tour>();
-        //    foreach (tour t in tours)
-        //    {
-        //        TourService nTourInfo = new TourService(t);
-        //        result.Add(nTourInfo);
-        //    }
-        //        return result;
-        //}
 
         [HttpPost]
         public void CreateTourCategory([FromBody]tourcategory tourCategory)
@@ -58,6 +46,20 @@ namespace TourAgencyServer.Controllers
                 db.tourcategories.Remove(tourCategory);
                 db.SaveChanges();
             }
+        }
+
+        [Route("api/tourcategories/{id}")]
+        public List<TourService> GetListTourInfoByTourcategory(int id)
+        {
+            List<TourService> result = new List<TourService>();
+            tourcategory tourCategory = db.tourcategories.Find(id);
+            List<tour> tours = tourCategory.tours.ToList<tour>();
+            foreach (tour t in tours)
+            {
+                TourService nTourInfo = new TourService(t);
+                result.Add(nTourInfo);
+            }
+            return result;
         }
     }
 }

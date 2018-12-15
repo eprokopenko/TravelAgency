@@ -23,19 +23,26 @@ namespace TourAgencyServer.Service
         {
             TourContext db = new TourContext();
             List<ImageInfo> result = new List<ImageInfo>();
+            List<image> images = new List<image>();
             switch (typeElem)
             {
                 case "category":
                     {
                         tourcategory cat = db.tourcategories.Find(idElem);
-                        List<image> images = GetImagesForCategory(cat);
-                        foreach (image im in images)
-                        {
-                            ImageInfo nImageInfo = new ImageInfo(im);
-                            result.Add(nImageInfo);
-                        }
+                        images = GetImagesForCategory(cat);
                         break;
                     }
+                case "tour":
+                    {
+                        tour t = db.tours.SingleOrDefault<tour>(m => m.IdTour == idElem);
+                        images = GetImagesForTour(t);
+                        break;
+                    }
+            }
+            foreach (image im in images)
+            {
+                ImageInfo nImageInfo = new ImageInfo(im);
+                result.Add(nImageInfo);
             }
             return result;
         }
@@ -44,6 +51,12 @@ namespace TourAgencyServer.Service
         {
             TourContext db = new TourContext();
             List<image> result = (from image in db.images where image.IdTourCategory == cat.IdTourCategory select image).ToList<image>();
+            return result;
+        }
+        static List<image> GetImagesForTour(tour t)
+        {
+            TourContext db = new TourContext();
+            List<image> result = (from image in db.images where image.IdTour == t.IdTour select image).ToList<image>();
             return result;
         }
 
