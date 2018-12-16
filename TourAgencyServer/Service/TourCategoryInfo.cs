@@ -8,14 +8,16 @@ namespace TourAgencyServer.Service
 {
     public class TourCategoryInfo
     {
-        public tourcategory TourCategory { get; set; }
+        public int IdTourCategory { get; set; }
+        public string Name { get; set; }
         public List<ImageInfo> Images { get; set; }
-
         TourContext db = new TourContext();
         public TourCategoryInfo(int idCategory)
         {
-            TourCategory = db.tourcategories.Find(idCategory);
-            Images = ImageInfo.GetImagesForElem("category", TourCategory.IdTourCategory);
+            tourcategory t = db.tourcategories.Find(idCategory);
+            IdTourCategory = idCategory;
+            Name = t.Name;
+            Images = ImageInfo.GetImagesForElem("category", IdTourCategory);
         }
 
         public static List<TourCategoryInfo> GetCategories()

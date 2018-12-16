@@ -10,12 +10,14 @@ namespace TourAgencyServer.Service
 {
     public class ImageInfo
     {
-        public image ImageElem { get; set; }
+        public int IdImage { get; set; }
+        public string Imagecol { get; set; }
         public string ImageFile { get; set; }
 
         public ImageInfo(image im)
         {
-            ImageElem = im;
+            IdImage = im.IdImage;
+            Imagecol = im.Imagecol;
             ImageFile = GetFileByString(im);
         }
 
