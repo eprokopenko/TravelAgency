@@ -8,10 +8,12 @@ namespace TourAgencyServer.Service
 {
     public class CountryInfo
     {
-        public country Country { get; set; }
+        public int IdCountry { get; set; }
+        public string Name { get; set; }
         public CountryInfo(country c)
         {
-            Country = c;
+            IdCountry = c.IdСountry;
+            Name = c.Name;
         }
         public static List<CountryInfo> GetCountries()
         {

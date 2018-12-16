@@ -9,7 +9,11 @@ namespace TourAgencyServer.Service
     public class TourInfo
     {
         TourContext db = new TourContext();
-        public tour Tour { get; set; }
+        public int IdTour { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal? Price { get; set; }
+        public int? NightsNumber { get; set; }
         public List<DateTime> StartDates { get; set; }
         public hotel Hotel { get; set; }
         public city City { get; set; }
@@ -19,12 +23,16 @@ namespace TourAgencyServer.Service
         public TourInfo(int idTour)
         {
             tour t = db.tours.SingleOrDefault<tour>(m => m.IdTour == idTour);
-            Tour = t;
+            IdTour = t.IdTour;
+            Name = t.Name;
+            Description = t.Description;
+            Price = t.Price;
+            NightsNumber = t.NightsNumber;
             StartDates = (from tourInstance in db.tourinstances where tourInstance.IdTour == t.IdTour select tourInstance.StartDate).ToList<DateTime>();
             Hotel = db.hotels.SingleOrDefault<hotel>(m => m.IdHotel == t.IdHotel);
             City = db.cities.SingleOrDefault<city>(m => m.IdCity == Hotel.IdCity);
             Country = db.countries.SingleOrDefault<country>(m => m.IdСountry == City.IdСountry);
-            Images = ImageInfo.GetImagesForElem("tour", Tour.IdTourCategory);
+            Images = ImageInfo.GetImagesForElem("tour", IdTour);
         }
 
         public static List<TourInfo> GetListTourByCategory(int idCategory)
